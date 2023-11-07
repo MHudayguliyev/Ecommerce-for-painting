@@ -1,0 +1,11 @@
+.tracker {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 30px;
+    a {
+        color: #949494;
+        cursor: pointer;
+        text-decoration: none;
+    }
+}

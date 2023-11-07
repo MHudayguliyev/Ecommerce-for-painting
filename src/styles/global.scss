@@ -1,0 +1,54 @@
+@use './globalBreakPoints.scss' as *;
+@use "./globalFunctions.scss" as *;
+@use "./globalTypography.scss" as typography;
+@use "./fonts.scss";
+
+:root{
+    --main-bg: #FFF;
+    --navbar-main-bg: rgba(251, 240, 220, 1);
+    --footer-main-bg: rgba(231, 231, 231, 1);
+    --main-txt-color: rgba(40, 48, 63, 1);
+    --secong-txt-color: rgba(0, 0, 0, 1);
+    --third-txt-color: rgba(255, 255, 255, 1);
+    --dropdown-main-bg:#7893AD;
+    --sub-category-active-bg: var(--dropdown-main-bg);
+    --button-main-bg: var(--dropdown-main-bg);
+
+    --border-radius: 15px;
+    --transition-cubic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+ }
+
+body {
+    font-family: "Circe", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.7px;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    overflow-y: overlay;
+    overflow-x: hidden;
+    margin: 0;
+    // &::-webkit-scrollbar {
+    //     width: 8px;
+    //     background-color: transparent;
+    // }
+    // &::-webkit-scrollbar-track {
+    //     right: 5px;
+    //     border-radius: 5px;
+    //     background-color: transparent;
+    // }
+    // &::-webkit-scrollbar-track-piece {
+    //     background: transparent;
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     border-radius: 10px;
+    // }
+}

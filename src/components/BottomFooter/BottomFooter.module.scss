@@ -1,0 +1,130 @@
+@use '../../styles/globalTypography.scss' as *;
+@use '../../styles/globalBreakpoints.scss' as *;
+
+.bottom__footer {
+    // position: fixed;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+    width: 100%;
+    height: 297px;
+    background: var(--footer-main-bg);
+    box-shadow: 0px -5px 15px 0px rgba(0, 0, 0, 0.05);
+    padding: 44px 0;
+    user-select: none;
+    color: var(--main-txt-color);
+
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 137px;
+        width: 100%;
+
+        .flex1 {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+
+            .allFrames {
+                display: flex;
+                align-items: flex-start;
+                gap: 120px;
+
+                @media screen and (max-width: $minMobile) {
+                    flex-direction: column;
+                    gap: 35px;
+                }
+
+
+                            
+                .frames {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 30px;
+                    .frame {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 10px;
+                        align-items: center;
+                        cursor: pointer;
+
+                        h3 {
+                            font-size: calc($fontSizeBig + 1) + px;
+                            font-weight: $fontWeightBold;
+                            line-height: $lineHeightMedium + px;
+                        }
+                    }
+                }
+            }
+
+            .user__agreement{
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                align-items: center;
+                cursor: pointer;
+
+                p {
+                    font-size: $fontSizeMedium + px;
+                    font-weight: $fontWeightRegular;
+                    color: #949494;
+                }
+            }
+
+            @media screen and (max-width: $minMobile) {
+                width: 100%;
+            }
+
+        }
+
+        .flex2 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 30px;
+
+            h3 {
+                font-size: calc($fontSizeBig + 1) + px;
+                font-weight: $fontWeightBold;
+                line-height: $lineHeightMedium + px;
+            }
+
+            .contacts__container {
+                display: flex;
+                gap: 80px;
+
+                @media screen and (max-width: $minMobile) {
+                    flex-direction: column;
+                    gap: 35px;
+                }
+            }
+            
+            .contacts {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .contact {
+                display: flex;
+                gap: 10px;
+            }
+
+        }
+
+        @media screen and (max-width: 1318px) {
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+
+    }
+
+
+    @media screen and (max-width: 1318px) {
+        height: auto;
+    }
+}

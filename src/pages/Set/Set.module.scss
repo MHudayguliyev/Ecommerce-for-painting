@@ -1,0 +1,153 @@
+@use '../../styles/globalTypography.scss' as *;
+@use '../../styles/globalBreakpoints.scss' as *;
+.selected__set {
+    display: flex;
+    gap: 36px;
+
+    @media screen and (max-width: 1446px)    {
+        flex-direction: column;
+    }
+
+    .image {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 721px;
+    }
+
+    .imgLg {
+        width: 100%;
+        height: 689px;
+    }
+
+    .images {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        img {
+            width: 95px;
+            height: 95px;
+            cursor: pointer;
+        }
+    }
+
+    .frames {
+        h1 {
+            color: var(--main-txt-color);
+            font-size: calc($fontSizeBig + 11) + px;
+            font-weight: $fontWeightRegular;
+            margin-bottom: 37px;
+        }
+        p {
+            color: var(--main-txt-color);
+            font-size: calc($fontSizeBig + 4) + px;
+            font-weight: calc($fontWeightRegular - 100);
+            margin-bottom: 10px;
+        }
+
+
+        .flex__frames {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+
+            .painting {
+                display: flex;
+                gap: 25px;
+
+                .frameImage {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 20px;
+
+                    img:first-child {
+                        width: 150px;
+                        height: 215px;
+                    }
+                    img:last-child {
+                        cursor: pointer;
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+
+                .addToCartGroup {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+
+                    .addToCartBtn {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 306px;
+                        background: var(--button-main-bg);
+                        color: rgba(255, 255, 255, 1);
+                        padding: 7px 10px;
+                        border: none;
+                        font-family: "Circe";
+
+                        span:last-child {
+                            display: flex;
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.accordionGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.accordionHeader {
+    font-size: 17px;
+    font-weight: 350px;
+    color: var(--main-txt-color);
+}
+
+.adds {    
+    width: 100%;
+    height: 250px;
+    margin-top: 60px;
+    padding: 0 114px;
+
+    .addsChild {
+        display: flex;
+        gap: 0;
+
+        div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--footer-main-bg);
+
+            p {
+                font-size: calc($fontSizeBig + 15) + px;
+                font-weight: $fontWeightRegular;
+                color: var(--main-txt-color);
+                text-align: center;
+            }
+        }
+    }
+}
+
+.recommendations {
+    h3 {
+        text-align: center;
+        margin: 50px 0;
+        color: var(--main-txt-color);
+        font-size: calc($fontSizeBig + 11) + px;
+        font-weight: $fontWeightRegular;
+    }
+}

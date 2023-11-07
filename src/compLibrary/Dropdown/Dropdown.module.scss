@@ -1,0 +1,88 @@
+@use '../../styles/globalAnimation.scss' as animation;
+@use '../../styles/globalShapes.scss' as shapes;
+@use '../../styles/global.scss';
+
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown__toggle {
+    border: 0;
+    outline: 0;
+    position: relative;
+    width: 100%;
+    background: transparent;
+
+}
+
+.dropdown__toggle > i {
+    font-size: 1.875rem;
+    color: var(--main-txt-color);
+}
+
+.dropdown__toggle_badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -12px;
+    right: -10px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: var(--main-bg);
+    color: var(--main-txt-white);
+    font-size: 0.8rem;
+}
+
+.dropdown__content {
+    z-index: shapes.$ZIndexAddition;
+    position: absolute;
+    top: calc(100% + 12px);
+    width: 306px;
+    max-height: 320px;
+    background-color: var(--main-bg);
+    border: 1px solid rgba(214, 214, 214, 1);
+    overflow: auto;
+
+    transform-origin: top right;
+    transform: scale(0);
+    transition: transform 0.3s ease 0s;
+
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--main-txt-color);
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-track {
+        right: 5px;
+        border-radius: 5px;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-track-piece {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--main-txt-color);
+      }
+}
+
+.active {
+    transform: scale(1);
+    transition: transform 0.3s var(--transition-cubic);
+}
+
+.dropdown__footer {
+    padding: 20px;
+    text-align: center;
+}
+
+.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}

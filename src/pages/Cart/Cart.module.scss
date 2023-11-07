@@ -1,0 +1,310 @@
+@use '../../styles/globalTypography.scss' as*;
+
+.flexItem {
+    display: flex;
+    gap: 30px;
+    user-select: none;
+    border: 1px solid green;
+
+    .cart {
+        border: 1px solid red;
+
+        .header {
+            color: var(--main-txt-color);
+            h1 {
+                font-size: calc($fontSizeBig + 11) + px;
+                font-weight: calc($fontWeightRegular);
+            }
+            p {
+                font-size: calc($fontSizeBig + 4) + px;
+                font-weight: calc($fontWeightRegular - 100);
+            }
+        }
+
+
+        .items {
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                gap: 62px;
+                margin-bottom: 62px;
+
+                .painting, .frame {
+                    display: flex;
+                    gap: 60px;
+
+                    .image {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 10px;
+
+                        img:first-child {
+                            width: 113px;
+                            height: 167px;
+                        }
+
+                        img:last-child {
+                            width: 24px;
+                            height: 24px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .paintingData {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 35px;
+                        align-items: flex-start;
+                        color: var(--main-txt-color);
+                        h3 {
+                            font-size: calc($fontSizeBig + 1) + px;
+                            font-weight: $fontWeightBold;
+                        }
+
+                        .sizeAndAmount {
+                            display: flex;
+                            gap: 40px;
+                            align-items: center;
+
+                            .size, .amount {
+                                display: flex;
+                                gap: 10px;
+                                align-items: center;
+                            }
+
+                            .amount {
+                                position: relative;
+                            }
+
+                            .amount div {
+                                display: flex;
+                                gap: 15px;
+                                padding-right: 15px;
+                                img {
+                                    cursor: pointer;
+                                }
+                            }
+
+                            .amount::after {
+                                content: '';
+                                position: absolute;
+                                right: 0;
+                                background: #D6D6D6;
+                                width: 1px;
+                                height: 25px;
+                            }
+
+                            .size p:first-child, .amount p:first-child {
+                                font-size: calc($fontSizeBig + 1) + px;
+                                font-weight: $fontWeightBold;
+                            }
+                            .size p:last-child {
+                                border-bottom: 1px solid var(--main-txt-color);
+                            }
+
+                            .trash {
+                                cursor: pointer;
+                            }
+                            
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+
+    }
+
+
+    .checkOut {
+        width: 543px;
+        border: 1px solid black;
+        color: var(--main-txt-color);
+
+        h2 {
+            font-size: calc($fontSizeBig + 4) + px;
+            font-weight: $fontWeightBold;
+            margin-bottom: 10px;
+        }
+
+        .the__form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+
+            .radioFields {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+                .deliveryTypes {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 15px;
+    
+                    div {
+                        display: flex;
+                        align-items: center;
+                        gap: inherit;
+    
+                        label {
+                            font-size: calc($fontSizeBig + 1) + px;
+                            font-weight: $fontWeightBold;
+                        }
+                    }
+    
+                    p {
+                        font-size: $fontSizeMedium + px;
+                        font-weight: $fontWeightRegular;
+                    }
+    
+                }
+    
+            }
+
+            .addressFields {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                p {
+                    font-size: $fontSizeMedium + px;
+                    font-weight: $fontWeightRegular;
+                }
+            }
+
+            .contactFields {
+                border: 1px solid red;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                p {
+                    font-size: $fontSizeMedium + px;
+                    font-weight: $fontWeightRegular;
+                }
+
+                .fieldWithHelp {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    position: relative;
+
+                    img {
+                        cursor: pointer;
+                    }
+
+                    span {
+                        position: absolute;
+                        top: 6px;
+                        left: 6px;
+                        color: rgba(148, 148, 148, 1);
+                    }
+                }
+
+            }
+
+            .order__now {
+                border: 1px solid;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+
+                .header {
+                    display: flex;
+                    gap: 110px;
+
+                    p {
+                        font-size: calc($fontSizeBig + 1) + px;
+                    }
+                    p:first-child {
+                        font-weight: $fontWeightRegular;
+                    }
+                    p:last-child {
+                        font-weight: $fontWeightBold;  
+                    }
+                }
+            }
+
+
+        }
+
+
+    }
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    label {
+        color: rgba(148, 148, 148, 1);
+        font-size: $fontSizeMedium + px;
+        font-weight: $fontWeightRegular;
+    }
+}
+
+.inputField {
+    border: 1px solid rgba(214, 214, 214, 1);
+    height: 35px;
+    width: 306px;
+
+    .textField {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+textarea {
+    height: 109px;
+    width: 306px;
+    resize: none;
+    border: 1px solid rgba(214, 214, 214, 1);
+    outline: 1px solid rgba(214, 214, 214, 1);
+}
+
+.accordionGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    margin-top: 10px;
+}
+
+.adds {    
+    width: 100%;
+    height: 250px;
+    margin-top: 60px;
+    padding: 0 114px;
+
+    .addsChild {
+        display: flex;
+        gap: 0;
+
+        div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--footer-main-bg);
+
+            p {
+                font-size: calc($fontSizeBig + 15) + px;
+                font-weight: $fontWeightRegular;
+                color: var(--main-txt-color);
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+.borderBottom {
+    height: 1px;
+    width: 100%;
+    background: #D6D6D6;
+}
