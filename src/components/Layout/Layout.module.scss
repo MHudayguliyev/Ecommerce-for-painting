@@ -1,6 +1,13 @@
+
+
 .layoutContent {
+    margin: 0 auto;
     margin-top: 170px;
     margin-bottom: 60px;
-    padding: 0 236px;
-    // border: 1px solid red;
+    width: 75%;
+    // max-width: 100em;
+
+    @media screen and (max-width: 826px) {
+        width: 100%;
+    }
 }

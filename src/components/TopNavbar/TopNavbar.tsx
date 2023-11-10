@@ -25,6 +25,8 @@ const TopNavbar = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
+    const [show, setShow] = useState<boolean>(false)
+
     const {
         data: categoriesData, 
         isError: isCategoriesDataError, 
@@ -52,8 +54,6 @@ const TopNavbar = () => {
     }, [activeTab])
 
     useEffect(() => {
-        // console.log("math param", match.params)
-        // refecthSetsData()
         if(!match.params.setGuid)
             dispatch(setSetName('')) // empty setName
         
@@ -62,7 +62,7 @@ const TopNavbar = () => {
     useEffect(() => {
         if(activeTab && (!isSetsDataError && !isSetsDataLoading))
         dispatch(setSetsDataSortByCatalogs({
-            active: activeTab?.catalogTitle as string, 
+            active: activeTab?.catalogTitle, 
             setsList: setsData!,
         }))
     }, [activeTab, setsData])
@@ -72,30 +72,45 @@ const TopNavbar = () => {
 
 
   return (
-    <div className={styles.top__navbar}>
+    <div className={cn({
+        top__navbar: true, 
+        navFullHeight: show
+    })}>
         <div className={styles.flex1}>
             <div className={styles.homeDecor}>
                 <img src={logo} alt='logo'/>
                 <img src={homeDecor} alt='homeDecor'/>
             </div>
 
-            <div className={styles.actions}>
-                <div className={styles.instagram}>
-                    <img src={instagram} alt='instagram'/>
-                    <p>Новинки каждый день</p>
+            <div className={styles.actions__container}>
+
+                <div className={styles.actions}>
+                    <div className={cn({
+                        instagram: true, 
+                    })}>
+                        <img src={instagram} alt='instagram'/>
+                        <p>Новинки каждый день</p>
+                    </div>
+                    <div onClick={() => navigate({to: '/cart', replace: true})} className={cn({
+                        cart: true, 
+                    })}>
+                        <img src={cart} alt='cart'/>
+                        <p>Корзина</p>
+                    </div>
                 </div>
-                <div className={styles.cart}>
-                    <img src={cart} alt='cart'/>
-                    <p>Корзина</p>
-                </div>
-                <img alt='burger' src={burger}/>
+
+                <img alt='burger' src={burger} onClick={() => setShow(!show)} className={styles.burger}/>
+
             </div>
         </div>
 
         <div className={styles.flex2}>
             {
                 !isCategoriesDataError && !isCategoriesDataLoading ? (
-                    <div className={styles.categories} >
+                    <div className={cn({
+                        categories: true, 
+                        show: show
+                    })} >
                         {
                             categoriesData?.map(category => (
                                 <div onClick={() => {

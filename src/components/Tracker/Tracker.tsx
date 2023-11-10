@@ -12,7 +12,6 @@ const Tracker = () => {
     const match = useMatch()
     const {_id, title} = useAppSelector(state => state.categoriesReducer.catalog)
     const setterName = useAppSelector(state => state.categoriesReducer.setName)
-    console.log('match', match.pathname)
 
   return (
     <div className={styles.tracker}>

@@ -1,4 +1,6 @@
 import { BASE_URL } from '@api/axiosInstance'
+import { KeyTypes } from '@app/redux/types/CartReducerTypes';
+import { PaintingsDataType } from '@app/redux/types/SetsTypes';
 
 export function capitalize(str: string) {
    return str.split(' ').map(item => item[0].toUpperCase() + item.substring(1, item.length)).join(' ')
@@ -128,3 +130,26 @@ export const getPaintings = (filename:string) => {
    if(filename)
       return `${BASE_URL}/uploads/paintings/resize/${filename}`
 } 
+
+export const updatePainting = ({data, actionPayload, key}: {data: PaintingsDataType[], actionPayload: {data: any, id:string}, key: KeyTypes} ): PaintingsDataType[] => {
+   const lev = [...data]
+   for(let i = 0; i < lev.length; i++){
+       if(lev[i]._id === actionPayload.id){
+           const paintCost = key === 'frame' ? lev[i].paint.cost : actionPayload.data.label.cost as number
+           const frameCost = key === 'frame' ? actionPayload.data.label.cost as number : lev[i].frame.cost 
+           const updated = {...lev[i], [key]: {
+               _id: key === 'frame' ? actionPayload.data.value : actionPayload.id, 
+               initialCost: actionPayload.data.label.cost, 
+               cost: actionPayload.data.label.cost, 
+               quantity: lev[i][key].quantity,
+               size: actionPayload.data.label.size, 
+               src: key === 'frame' ? actionPayload.data.src : lev[i].paint.src,
+               name: key === 'frame' ? actionPayload.data.label.name : lev[i].paint.name
+           }, 
+           total: Number(frameCost + paintCost)
+           }
+           lev[i] = updated
+       }
+   }
+   return lev
+}

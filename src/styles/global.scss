@@ -35,7 +35,6 @@ body {
     scroll-behavior: smooth;
     overflow-y: overlay;
     overflow-x: hidden;
-    margin: 0;
     // &::-webkit-scrollbar {
     //     width: 8px;
     //     background-color: transparent;
@@ -51,4 +50,12 @@ body {
     // &::-webkit-scrollbar-thumb {
     //     border-radius: 10px;
     // }
+}
+
+.react-slideshow-container {
+    width: 721px;
+}
+
+.default-nav:last-of-type, .default-nav:first-of-type {
+    z-index: 1;
 }

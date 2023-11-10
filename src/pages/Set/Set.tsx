@@ -1,10 +1,13 @@
 import React, {useEffect, useState, useMemo} from 'react'
 import { useQuery } from 'react-query'
-import { useMatch, useNavigate } from '@tanstack/react-location'
+import { useMatch, useNavigate, useLocation } from '@tanstack/react-location'
 //redux
 import { useAppDispatch, useAppSelector } from '@app/hooks/redux_hooks'
 import { setSetName } from '@redux/reducer/CategoriesReducer'
+import { setPaintingDataFrame, setPaintingDataPaint, setPaintingsData } from '@app/redux/reducer/SetsReducer'
+import { setCartData, updateCartDataFrame, updateCartDataPaint } from '@app/redux/reducer/CartReducer'
 //styles
+import classNames from 'classnames/bind'
 import styles from './Set.module.scss'
 //queries
 import { GetFrames, GetSet } from '@app/api/Queries/Getters'
@@ -15,16 +18,20 @@ import lupa from '@app/assets/icons/lupa_icon.svg'
 import arrowDown from '@app/assets/icons/arrow_down_white.svg';
 //comp
 import DropDownSelect from '@app/components/DropdownSelect/DropdownSelect'
+import SetCards from '@app/components/SetCards/SetCards'
+import ImageModal from '@app/components/Modals/ImageModal/ImageModal'
+
 //lib
 import Button from '@app/compLibrary/Button'
 import Accordion from '@app/compLibrary/Accordion'
-//images
-import adds from '@app/assets/images/adds.png'
 import Row from '@app/compLibrary/Grid/Row'
 import Col from '@app/compLibrary/Grid/Col'
-import SetCards from '@app/components/SetCards/SetCards'
-import ImageModal from '@app/components/Modals/ImageModal/ImageModal'
-import { addToCart, setPaintingDataFrame, setPaintingDataPaint, setPaintingsData } from '@app/redux/reducer/SetsReducer'
+//images
+import adds from '@app/assets/images/adds.png'
+//image-slider 
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -33,14 +40,20 @@ const scrollToTop = () => {
   });
 }
 
+const cn = classNames.bind(styles)
 const Sets = () => {
   const match = useMatch()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const location = useLocation()
+  // console.log('location', useLocation())
 
   //states
   const setsData = useAppSelector(state => state.setsReducer.setsData)
   const paintingsData = useAppSelector(state => state.setsReducer.paintingsData)
+  const cartData = useAppSelector(state => state.cartReducer.cartData)
+  // console.log('cartdata00', cartData[0])
+
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [selectedPainting, setSelectedPainting] = useState({
     header: '', image: ''
@@ -64,26 +77,32 @@ const Sets = () => {
       (!isSetsLoading && !isSetsError) && 
       (!isFramesLoading && !isFramesError)
     ){
+      // console.log("setData", setData)
       dispatch(setSetName(setData?.titleSets))
       setImage(getImage(setData?.coverImageName?.[0]!)!)
-      const leverage = setData?.paintingsName?.map(painting => {
+      const leverage = setData!.paintingsName.map(painting => {
         const frame = framesData?.[0]
-        const printSizePost = painting?.printSizePost?.[0]
+        const printSizePost = painting.printSizePost[0]
         return {
-          _id: painting?._id,  
+          _id: painting._id,  
           total: Number(printSizePost?.pricePost + frame?.frameСost!),
-          addedToCart: false, 
           paint: {
-            cost: printSizePost?.pricePost,
-            size: printSizePost?.prSize,
-            name: painting?.title, 
+            _id: painting._id, 
+            initialCost: printSizePost.pricePost, 
+            cost: printSizePost.pricePost,
+            size: printSizePost.prSize,
+            name: painting.title, 
             src: painting.coverImageName?.filename, 
+            quantity: painting.quantity
           }, 
           frame: {
-            size: frame?.frameSize, 
+            _id: frame?._id, 
+            initialCost: frame?.frameСost,
             cost: frame?.frameСost, 
+            size: frame?.frameSize, 
             name: frame?.frameName, 
-            src: frame?.coverImageName?.filename
+            src: frame?.coverImageName?.filename,
+            quantity: frame?.quantity
           }
         }
       })
@@ -106,13 +125,13 @@ const Sets = () => {
   }, [framesData])
 
   useEffect(() => {
-    console.log('paint', paintingsData)
-  }, [paintingsData])
+    console.log('cartData', cartData)
+  }, [cartData])
 
 
 
   return (
-    <div>
+    <div className={styles.set__container}>
       <ImageModal 
         show={openModal}
         setShow={() => setOpenModal(false)}
@@ -123,9 +142,16 @@ const Sets = () => {
 
       <div className={styles.selected__set}>
         <div className={styles.image}>
-          <img src={image} className={styles.imgLg}/>
+          <Slide>
+            <img src={image} className={styles.imgLg}/>
+            <img src={image} className={styles.imgLg}/>
+            <img src={image} className={styles.imgLg}/>
+            <img src={image} className={styles.imgLg}/>
+            <img src={image} className={styles.imgLg}/>
+          </Slide>
           <div className={styles.images}>
-            <img src={image}/>
+  
+            <img src={image} onClick={() => console.log("location", location)}/>
             <img src={image}/>
             <img src={image}/>
             <img src={image}/>
@@ -167,6 +193,7 @@ const Sets = () => {
                       data={printSizeList}
                       onChange={(data) => {
                         dispatch(setPaintingDataPaint({data, id: painting._id}))
+                        dispatch(updateCartDataPaint({data, id: painting._id}))
                       }}
                       fetchStatuses={{isLoading: isSetsLoading, isError: isSetsError}}
                       title={printSizeList?.[0]}
@@ -175,11 +202,18 @@ const Sets = () => {
                       data={framesList!}
                       onChange={(data) => {
                         dispatch(setPaintingDataFrame({data, id: painting._id}))
+                        dispatch(updateCartDataFrame({data, id: painting._id}))
                       }}
                       fetchStatuses={{isLoading: isSetsLoading, isError: isSetsError}}
                       title={framesList?.[0]}
+                      renderNameWithSize
                     />
-                    <button className={styles.addToCartBtn} onClick={() => dispatch(addToCart({id: painting._id}))}>
+                    <button  className={cn({
+                      addToCartBtn: true, 
+                      disabled: (cartData.length > 0 && cartData.some(data => data._id === painting._id)) 
+                    })} 
+                    onClick={() => dispatch(setCartData(paintingsData[index]))}
+                    >
                       <span>Добавить в корзину</span>
                       <span>
                         {paintingsData[index]?.total} ман.
@@ -194,7 +228,7 @@ const Sets = () => {
             }
 
             <Button color='blue' style={{display: 'flex', justifyContent: 'center', width: '305px'}} onClick={() => navigate({to: '/cart', replace: true})}>
-              Salam
+              Перейти в корзину
             </Button>
           </div>
 

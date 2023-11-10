@@ -6,8 +6,14 @@ import storage from 'redux-persist/lib/storage';
 //reducers
 import CategoriesReducer from './reducer/CategoriesReducer';
 import SetsReducer from './reducer/SetsReducer';
+import CartReducer from './reducer/CartReducer';
 
-const config = {
+const cartReducerCfg = {
+    key: 'cart', 
+    storage, 
+    whitelist: ['cartData']
+}
+const setReducerCfg = {
     key: 'set', 
     storage, 
     whitelist: ['paintingsData']
@@ -17,7 +23,8 @@ const store = configureStore({
     
     reducer: {
        categoriesReducer: CategoriesReducer, 
-       setsReducer: persistReducer(config, SetsReducer)
+       setsReducer: persistReducer(setReducerCfg, SetsReducer), 
+       cartReducer: persistReducer(cartReducerCfg, CartReducer)
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}) 
 });

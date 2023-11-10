@@ -2,14 +2,14 @@ export type Categories = {
     _id: string
     catalogTitle:string
     catalogUrl:string
-    createdDate: Date | undefined
+    createdDate: string 
     __v: number
     priority: number
     subCatalogsName: {
         _id:string
         subcatalogTitle:string
         coverImageName: null
-        createdDate:Date | undefined
+        createdDate:string
         __v:number
     }[]
 }
@@ -18,7 +18,7 @@ export type SubCategories = {
     _id:string
     subcatalogTitle:string
     coverImageName: null
-    createdDate:Date | undefined
+    createdDate:string
     __v:number
 }
 
@@ -62,8 +62,6 @@ export type Sets = {
     }[]
 }
 
-
-
 export type Frames = {
     _id: string
     quantity: number
@@ -73,4 +71,25 @@ export type Frames = {
     coverImageName: CoverImage
     createdDate:Date | undefined
     __v:number
+}
+
+export type PostDataType<T> = {
+    totalCost: number 
+    deliveryType:T
+    paymentMethod:T 
+    city:T 
+    address: T 
+    name:T 
+    phone: T
+    insta: T
+    email: T
+    comments: T
+    CART: {
+        id: T
+        title: T
+        size: T
+        cost: number
+        img: T
+        quantity: number
+    }[]
 }

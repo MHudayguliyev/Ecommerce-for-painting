@@ -27,8 +27,12 @@ interface DropdownSelectProps {
     value?: LabelValueTypes
     onChange: (value: LabelValueTypes) => void
     fetchStatuses: { isLoading: boolean, isError: boolean }
+   /** @defaultValue false  */
     disable?: boolean, 
+   /** @defaultValue false  */
     renderNameOnly?: boolean
+   /** @defaultValue false  */
+    renderNameWithSize?: boolean
 }
 
 const cx = classNames.bind(styles)
@@ -40,9 +44,10 @@ function DropDownSelect(props: DropdownSelectProps) {
        value, 
        maintitleOutside,
        onChange,
-       disable,
        fetchStatuses, 
-       renderNameOnly
+       disable = false,
+       renderNameOnly = false, 
+       renderNameWithSize = false,
     } = props;
 
  
@@ -68,7 +73,6 @@ function DropDownSelect(props: DropdownSelectProps) {
 
  
     useEffect(() => {
-      // console.log(mainTitle)
        if (mainTitle?.value)
        onChange(mainTitle);
     }, [mainTitle])
@@ -80,7 +84,15 @@ function DropDownSelect(props: DropdownSelectProps) {
              <div className={styles.toggleWrapper}>
                 <span>
                     {
-                        renderNameOnly ? title!.label.name : mainTitle?.value ? mainTitle.label.size : title?.label.size
+                        renderNameOnly ? title!.label.name : mainTitle?.value ? (
+                           renderNameWithSize ? (
+                              <div className={styles.frameTitle}>{mainTitle?.label.name}({mainTitle?.label.size})</div>
+                           ) : mainTitle.label.size
+                        ) : (
+                           renderNameWithSize ? (
+                              <div className={styles.frameTitle}>{title?.label.name}({title?.label.size})</div>
+                           ) : title?.label.size
+                        )
                     }
                 </span>
 
@@ -113,9 +125,9 @@ function DropDownSelect(props: DropdownSelectProps) {
                                             {
                                              renderNameOnly ? <span>{item.label.name}</span> : (
                                                 <>
-                                                   <span>
-                                                      {item.label.size}
-                                                   </span>
+                                                   {
+                                                      renderNameWithSize ? <span className={styles.frameTitle}>{item?.label.name}({item?.label.size})</span> : <span>{item?.label.size}</span>
+                                                   }
                                                    <span>
                                                       {item.label.cost} ман.
                                                    </span>

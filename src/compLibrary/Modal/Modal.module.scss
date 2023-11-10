@@ -20,13 +20,12 @@
 }
 
 .modalContent {
-   top: 7%;
-   // transform: translateY(10%);
+   // top: 7%;
    position: relative;
    margin: 0 auto;
    border-radius: var(--border-radius);
    background-color: var(--main-bg);
-   width: 30%;
+   width: 715px;
    height: auto;
    padding: toRem(14);
    @media screen and (max-width: $desktop) {

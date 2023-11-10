@@ -23,8 +23,11 @@
       align-items: center;
       gap: 4px;
       font-weight: $fontWeightBold;
-
    }
+}
+
+.frameTitle {
+   font-size: 15px;
 }
 
 .toggleWrapper>i {
@@ -88,7 +91,7 @@
    border-bottom: 1px solid var(--main-txt-color);
 
    span {
-      font-size: calc($fontSizeBig + 1) + px;
+      // font-size: calc($fontSizeBig + 1) + px;
       color: var(--main-txt-color);
    }
 

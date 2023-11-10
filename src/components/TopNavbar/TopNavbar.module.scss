@@ -13,44 +13,71 @@
     justify-content: center;
     gap: 25px;
     user-select: none;
-    padding: 0 236px;
     z-index: 4;
 
 
     .flex1 {
+        position: relative;
         display: flex;
         align-items: center;
+        gap: 10px;
         justify-content: space-between;
-        width: 100%;
+        width: 75%;
+        max-width: 100em;
+        margin: 0 auto;
         .homeDecor {
             display: flex;
             align-items: center;
         }
 
-        .actions{
+        .actions__container {
             display: flex;
             gap: 35px;
-            color: var(--main-txt-color);
 
-            .instagram, .cart {
+
+            .actions{
                 display: flex;
-                gap: 6px;
-                align-items: center;
-                cursor: pointer;
-            }
-            img {
-                cursor: pointer;
-            }
+                gap: inherit;
+                color: var(--main-txt-color);
+            
+                .instagram, .cart {
+                    display: flex;
+                    gap: 6px;
+                    align-items: center;
+                    cursor: pointer;
 
+                    @media screen and (max-width:434px) {
+                        align-items: flex-start;
+                    }
+                }
+                img {
+                    cursor: pointer;
+                }
+                            
+                @media screen and (max-width: 814px) {
+                    position: absolute;
+                    top: 50px;
+                    left: 0;
+                    display: none;
+                }
+            
+            }
         }
+
+
+
+
     }
 
     .flex2 .categories {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
-        gap: 40px;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 75%;
+        max-width: 100em;
+        margin: 0 auto;
 
         .category p {
             font-size: calc($fontSizeBig + 1) + px;
@@ -62,5 +89,36 @@
         .tabActive {
             border-bottom: 1px solid #F04F30;
         }
+
+        @media screen and (max-width: 814px) {
+            margin-top: 10px;
+        }
+        @media screen and (max-width:434px) {
+            margin-top: 30px;
+        }
     }
 }
+
+.burger {
+    display: none;
+    
+    @media screen and (max-width: 814px) {
+        display: block;
+    }
+}
+
+.navFullHeight {
+    height: 100vh;
+    justify-content: flex-start;
+}
+
+// .show {
+//     display: block;
+// }
+
+
+
+// .show{
+//     border: 1px solid green;
+//     opacity: 1;
+// }

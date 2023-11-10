@@ -1,33 +1,26 @@
 import { Sets } from "@app/api/Types";
 
-interface PrintSizePostType {
-    _id:string 
-    prSize:string 
-    priceCost:string 
-    createdDate: Date
-    __v: number   
+export interface PaintFrameTypes {
+    initialCost: number
+    cost: number
+    size: string
+    name?:string 
+    src:string 
+    quantity: number
 }
 
-type PaintingsDataType = {
+export interface PaintingsSubItemType {
+    paint: PaintFrameTypes;
+    frame: PaintFrameTypes;
+}
+
+export interface PaintingsDataType extends PaintingsSubItemType {
     _id:string
-    total: number 
-    addedToCart: boolean
-    paint: {
-        cost: number
-        size: string
-        name?:string 
-        src:string 
-    }, 
-    frame: {
-        size:string
-        cost:number 
-        name?:string
-        src?: string 
-    }
-}[]
+    total: number
+}
 
 export interface InitialState {
     setsData: Sets[]
     setsDataLoading: boolean
-    paintingsData: PaintingsDataType
+    paintingsData: PaintingsDataType[]
 }
