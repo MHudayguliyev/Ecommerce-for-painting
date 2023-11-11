@@ -269,12 +269,15 @@ const Sets = () => {
 
 
 
-      <div className={styles.adds}>
-        <div className={styles.addsChild}>
-            <img src={adds} alt='adds'/>
-            <div >
-              <p>Здесь могла бы быть ваша реклама</p>
-            </div>
+      <div className={styles.presentCertificateContainer}>
+        <div className={styles.presentCertificate}>
+          <div className={styles.presentChild}>
+              <div className={styles.header}>
+                <h1>Подарочный сертификат</h1>
+                <p>то что понравится вашим близким</p>
+              </div>
+              <p className={styles.more}>Подробнее</p>
+          </div>
         </div>
       </div>
 
