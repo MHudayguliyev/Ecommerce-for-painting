@@ -37,6 +37,7 @@ import { PostDataType } from '@app/api/Types';
 import { PaintingsSubItemType } from '@app/redux/types/SetsTypes';
 import { PostOrders } from '@app/api/Queries/Post';
 import axios from 'axios';
+import { post } from '@app/api/api_helper';
 
 interface FormikTypes<T> {
   status: T
@@ -162,8 +163,11 @@ const Cart = () => {
 
         try {
           console.log(forPost)
-          const response = await axios.post('https://client.st.com.tm/api/orders', forPost)
+          const response = await PostOrders(forPost)
           console.log('response', response)
+
+          if(response.status === 200)
+            toast.success('Your order successfully made.')
         } catch (error) {
           console.log('error', error)
         }
