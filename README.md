@@ -28,5 +28,5 @@ If you are developing a production application, we recommend updating the config
 
 ## 1. do: npm i 
 ## 2. npm run dev 
-## 3. go to http://localhost:5173/catalogs/ 
+## 3. go to http://localhost:5173/catalogs
 ## 4. select one of catalogs to start with..
